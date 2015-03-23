@@ -13,6 +13,8 @@ public class BibliotecaApp {
         menu = new Menu();
         library = new Library();
         menu.addItem(new MenuItem("List Books", new ListBooksCommand(System.out, library)));
+        menu.addItem(new MenuItem("CheckOut", new CheckOutCommand(library,System.in,System.out)));
+        menu.addItem(new MenuItem("Return Book", new ReturnCommand(library,System.in,System.out)));
         menu.addItem(new MenuItem("Quit", new QuitCommand()));
         keepRunning = true;
     }
