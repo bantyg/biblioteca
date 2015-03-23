@@ -1,16 +1,12 @@
 package com.twu.biblioteca;
 
-/**
- * Created by poojag on 3/21/2015.
- */
 public class Book {
-    private final String name;
-    private final String author;
-    private final int year;
+    private String title;
+    private String author;
+    private Integer year;
 
-    public Book(String name, String author, int year) {
-
-        this.name = name;
+    public Book(String title, String author,Integer year ) {
+        this.title = title;
         this.author = author;
         this.year = year;
     }
@@ -22,23 +18,27 @@ public class Book {
 
         Book book = (Book) o;
 
-        if (year != book.year) return false;
-        if (!author.equals(book.author)) return false;
-        if (!name.equals(book.name)) return false;
+        if (author != null ? !author.equals(book.author) : book.author != null) return false;
+        if (title != null ? !title.equals(book.title) : book.title != null) return false;
+        if (year != null ? !year.equals(book.year) : book.year != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + author.hashCode();
-        result = 31 * result + year;
+        int result = title != null ? title.hashCode() : 0;
+        result = 31 * result + (author != null ? author.hashCode() : 0);
+        result = 31 * result + (year != null ? year.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return name+"\t\t"+author+"\t\t"+year;
+        return title + '-' + author + '-' + year;
+    }
+
+    public static String getHeader() {
+        return "Title - Author - year of publication\n";
     }
 }
