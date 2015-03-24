@@ -4,12 +4,11 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import static com.twu.biblioteca.Library.*;
 
-/**
- * Created by poojag on 3/23/2015.
- */
 public class ReturnCommand implements Command{
+    static final String CHECK_IN_SUCCESS = "Thank you for returning the book.";
+    static final String CHECK_IN_UN_SUCCESS = "That is not a valid book to return.";
+
     private final Library library;
     private final InputStream in;
     private final PrintStream out;
@@ -22,7 +21,7 @@ public class ReturnCommand implements Command{
 
     @Override
     public void execute() throws QuitBibliotecaException {
-        out.print(Book.REQUEST_MESSAGE);
+        out.print(REQUEST_MESSAGE);
         Scanner s = new Scanner(in);
         if (library.checkIn(s.nextLine().trim())) out.println(CHECK_IN_SUCCESS);
         else out.println(CHECK_IN_UN_SUCCESS);

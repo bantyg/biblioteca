@@ -16,7 +16,7 @@ public class CheckOutCommandTest {
         ByteArrayOutputStream os =new ByteArrayOutputStream();
         PrintStream ps =new PrintStream(os);
         new CheckOutCommand(new Library(),in,ps).execute();
-        assertEquals(Book.REQUEST_MESSAGE+Library.CHECKOUT_SUCCESS + System.lineSeparator(),os.toString());
+        assertEquals(Command.REQUEST_MESSAGE+CheckOutCommand.CHECKOUT_SUCCESS + System.lineSeparator(),os.toString());
     }
     @Test
     public void testCheckOutShouldGiveMessageOnUnSuccessFullCheckout() throws Exception {
@@ -24,6 +24,6 @@ public class CheckOutCommandTest {
         ByteArrayOutputStream os =new ByteArrayOutputStream();
         PrintStream ps =new PrintStream(os);
         new CheckOutCommand(new Library(),in,ps).execute();
-        assertEquals(Book.REQUEST_MESSAGE+Library.CHECKOUT_UN_SUCCESS +System.lineSeparator(),os.toString());
+        assertEquals(Command.REQUEST_MESSAGE+CheckOutCommand.CHECKOUT_UN_SUCCESS +System.lineSeparator(),os.toString());
     }
 }

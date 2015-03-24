@@ -14,20 +14,6 @@ public class LibraryTest {
         assertTrue(checkedOut);
     }
     @Test
-    public void testCheckdeoutBooksAreListedInCheckOutList() throws Exception {
-        Library library = new Library();
-        Book ramayan = new Book("Ramayana", "Valmiki", 2001);
-        boolean checkedOut = library.checkOut("Ramayana");
-        assertTrue(library.isCheckedOut("Ramayana"));
-        assertTrue(checkedOut);
-    }
-    @Test
-    public void testIsCheckedOutShouldRetunFalseIfBookHasNotCheckedOut() throws Exception {
-        Library library = new Library();
-        assertFalse(library.isCheckedOut("Ramayana"));
-    }
-
-    @Test
     public void testCheckoutUnSuccessIfBookIsNotAvailable() throws Exception {
         Library library = new Library();
         assertFalse(library.checkOut("mahabharta"));
