@@ -1,6 +1,6 @@
 package com.twu.biblioteca;
 
-public class Book {
+public class Book implements Item {
     private String title;
     private String author;
     private Integer year;
@@ -36,11 +36,12 @@ public class Book {
         return title + '-' + author + '-' + year;
     }
 
-    public static String getHeader() {
+    public String getHeader() {
         return "Title - Author - year of publication\n";
     }
 
 
+    @Override
     public boolean isTitleEquals(String title) {
         return this.title.equals(title);
     }

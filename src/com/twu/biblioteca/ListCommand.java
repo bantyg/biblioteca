@@ -2,12 +2,12 @@ package com.twu.biblioteca;
 
 import java.io.PrintStream;
 
-public class ListBooksCommand implements Command {
+public class ListCommand implements Command {
 
     private PrintStream ps;
     private Library library;
 
-    public ListBooksCommand(PrintStream ps, Library library) {
+    public ListCommand(PrintStream ps, Library library) {
         this.ps = ps;
         this.library = library;
     }

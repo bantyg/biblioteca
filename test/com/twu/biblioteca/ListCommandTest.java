@@ -7,14 +7,14 @@ import java.io.PrintStream;
 
 import static org.junit.Assert.assertEquals;
 
-public class ListBooksCommandTest {
+public class ListCommandTest {
     @Test
     public void shouldListBooksWhenExecuted(){
-        Library library = new Library();
+        Library library = Library.initLibrary(LibraryMode.BOOK);
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(os);
-        ListBooksCommand listBooksCommand = new ListBooksCommand(ps , library);
-        listBooksCommand.execute();
+        ListCommand listCommand = new ListCommand(ps , library);
+        listCommand.execute();
         assertEquals(library.toString() + System.lineSeparator(), os.toString());
     }
 

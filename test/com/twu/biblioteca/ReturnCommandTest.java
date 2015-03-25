@@ -12,13 +12,13 @@ import static org.junit.Assert.*;
 public class ReturnCommandTest {
     @Test
     public void testReturnCommandShouldGiveSuccessMessageWhenBookIsSuccessfullyReturned() throws Exception {
-        Library library = new Library();
+        Library library = Library.initLibrary(LibraryMode.BOOK);
         library.checkOut("Ramayana");
         InputStream in = new ByteArrayInputStream("Ramayana".getBytes());
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(os);
         new ReturnCommand(library,in,ps).execute();
-        assertEquals(Command.REQUEST_MESSAGE+ReturnCommand.CHECK_IN_SUCCESS+System.lineSeparator(),os.toString());
+        assertEquals(Command.REQUEST_MESSAGE.replace("{ITEM}",library.getMode())+ReturnCommand.CHECK_IN_SUCCESS.replace("{ITEM}",library.getMode())+System.lineSeparator(),os.toString());
     }
 
     @Test
@@ -26,8 +26,8 @@ public class ReturnCommandTest {
         InputStream in = new ByteArrayInputStream("Ramayana".getBytes());
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(os);
-        new ReturnCommand(new Library(),in,ps).execute();
-        assertEquals(Command.REQUEST_MESSAGE+ReturnCommand.CHECK_IN_UN_SUCCESS+System.lineSeparator(),os.toString());
+        new ReturnCommand(Library.initLibrary(LibraryMode.BOOK),in,ps).execute();
+        assertEquals(Command.REQUEST_MESSAGE.replace("{ITEM}","book")+ReturnCommand.CHECK_IN_UN_SUCCESS.replace("{ITEM}","book")+System.lineSeparator(),os.toString());
     }
 
 }

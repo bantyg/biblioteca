@@ -15,15 +15,15 @@ public class CheckOutCommandTest {
         InputStream in = new ByteArrayInputStream("Ramayana".getBytes());
         ByteArrayOutputStream os =new ByteArrayOutputStream();
         PrintStream ps =new PrintStream(os);
-        new CheckOutCommand(new Library(),in,ps).execute();
-        assertEquals(Command.REQUEST_MESSAGE+CheckOutCommand.CHECKOUT_SUCCESS + System.lineSeparator(),os.toString());
+        new CheckOutCommand(Library.initLibrary(LibraryMode.BOOK),in,ps).execute();
+        assertEquals(Command.REQUEST_MESSAGE.replace("{ITEM}","book")+CheckOutCommand.CHECKOUT_SUCCESS.replace("{ITEM}","book") + System.lineSeparator(),os.toString());
     }
     @Test
     public void testCheckOutShouldGiveMessageOnUnSuccessFullCheckout() throws Exception {
         InputStream in = new ByteArrayInputStream("mahabharta".getBytes());
         ByteArrayOutputStream os =new ByteArrayOutputStream();
         PrintStream ps =new PrintStream(os);
-        new CheckOutCommand(new Library(),in,ps).execute();
-        assertEquals(Command.REQUEST_MESSAGE+CheckOutCommand.CHECKOUT_UN_SUCCESS +System.lineSeparator(),os.toString());
+        new CheckOutCommand(Library.initLibrary(LibraryMode.BOOK),in,ps).execute();
+        assertEquals(Command.REQUEST_MESSAGE.replace("{ITEM}","book")+CheckOutCommand.CHECKOUT_UN_SUCCESS.replace("{ITEM}","book") +System.lineSeparator(),os.toString());
     }
 }

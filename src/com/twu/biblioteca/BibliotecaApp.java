@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class BibliotecaApp {
@@ -9,18 +10,23 @@ public class BibliotecaApp {
     private final Menu menu;
     private boolean keepRunning;
 
-    public BibliotecaApp() {
+    public BibliotecaApp(LibraryMode libraryMode) {
         menu = new Menu();
-        library = new Library();
-        menu.addItem(new MenuItem("List Books", new ListBooksCommand(System.out, library)));
+        library = Library.initLibrary(libraryMode);
+        menu.addItem(new MenuItem("List ", new ListCommand(System.out, library)));
         menu.addItem(new MenuItem("CheckOut", new CheckOutCommand(library,System.in,System.out)));
-        menu.addItem(new MenuItem("Return Book", new ReturnCommand(library,System.in,System.out)));
+        menu.addItem(new MenuItem("Return ", new ReturnCommand(library,System.in,System.out)));
         menu.addItem(new MenuItem("Quit", new QuitCommand()));
         keepRunning = true;
     }
 
     public static void main(String[] args) {
-        BibliotecaApp b = new BibliotecaApp();
+        BibliotecaApp b;
+        if(Arrays.asList(args).contains("-m")){
+            b = new BibliotecaApp(LibraryMode.MOVIE);
+        }else{
+        b =new BibliotecaApp(LibraryMode.BOOK);
+        }
         b.run();
     }
 

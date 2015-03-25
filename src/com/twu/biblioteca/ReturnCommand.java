@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 
 public class ReturnCommand implements Command{
-    static final String CHECK_IN_SUCCESS = "Thank you for returning the book.";
-    static final String CHECK_IN_UN_SUCCESS = "That is not a valid book to return.";
+    static final String CHECK_IN_SUCCESS = "Thank you for returning the {ITEM}.";
+    static final String CHECK_IN_UN_SUCCESS = "That is not a valid {ITEM} to return.";
 
     private final Library library;
     private final InputStream in;
@@ -21,9 +21,9 @@ public class ReturnCommand implements Command{
 
     @Override
     public void execute() throws QuitBibliotecaException {
-        out.print(REQUEST_MESSAGE);
+        out.print(REQUEST_MESSAGE.replace("{ITEM}", library.getMode()));
         Scanner s = new Scanner(in);
-        if (library.checkIn(s.nextLine().trim())) out.println(CHECK_IN_SUCCESS);
-        else out.println(CHECK_IN_UN_SUCCESS);
+        if (library.checkIn(s.nextLine().trim())) out.println(CHECK_IN_SUCCESS.replace("{ITEM}",library.getMode()));
+        else out.println(CHECK_IN_UN_SUCCESS.replace("{ITEM}",library.getMode()));
     }
 }

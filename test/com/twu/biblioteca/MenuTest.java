@@ -21,8 +21,8 @@ public class MenuTest {
         menu = new Menu();
         quit = new MenuItem("Quit", new QuitCommand());
         PrintStream out = System.out;
-        Library lib = new Library();
-        listBooks = new MenuItem("List Books", new ListBooksCommand(out, lib));
+        Library lib = Library.initLibrary(LibraryMode.BOOK);
+        listBooks = new MenuItem("List Books", new ListCommand(out, lib));
 
     }
 
