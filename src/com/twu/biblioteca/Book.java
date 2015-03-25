@@ -1,17 +1,14 @@
 package com.twu.biblioteca;
 
 public class Book {
-    static  final String REQUEST_MESSAGE ="Enter the Book Name:";
     private String title;
     private String author;
     private Integer year;
-    private boolean checkedOut;
 
     public Book(String title, String author,Integer year) {
         this.title = title;
         this.author = author;
         this.year = year;
-        checkedOut=false;
     }
 
     @Override
@@ -23,8 +20,7 @@ public class Book {
 
         if (author != null ? !author.equals(book.author) : book.author != null) return false;
         if (title != null ? !title.equals(book.title) : book.title != null) return false;
-        if (year != null ? !year.equals(book.year) : book.year != null) return false;
-        return true;
+        return !(year != null ? !year.equals(book.year) : book.year != null);
     }
 
     @Override
@@ -44,11 +40,6 @@ public class Book {
         return "Title - Author - year of publication\n";
     }
 
-
-
-    public boolean isAvailable() {
-        return !checkedOut;
-    }
 
     public boolean isTitleEquals(String title) {
         return this.title.equals(title);
