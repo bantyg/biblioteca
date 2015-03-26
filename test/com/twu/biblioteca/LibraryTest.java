@@ -14,7 +14,7 @@ public class LibraryTest {
     }
     @Test
     public void testCheckoutUnSuccessIfBookIsNotAvailable() throws Exception {
-        Library library = Library.initLibrary(LibraryMode.BOOK);
+       Library library = Library.initLibrary(LibraryMode.BOOK);
         assertFalse(library.checkOut("mahabharta"));
     }
 

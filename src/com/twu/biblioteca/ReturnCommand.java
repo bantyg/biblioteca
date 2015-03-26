@@ -21,7 +21,7 @@ public class ReturnCommand implements Command{
 
     @Override
     public void execute() throws QuitBibliotecaException {
-        out.print(REQUEST_MESSAGE.replace("{ITEM}", library.getMode()));
+        out.print(Library.REQUEST_MESSAGE.replace("{ITEM}", library.getMode()));
         Scanner s = new Scanner(in);
         if (library.checkIn(s.nextLine().trim())) out.println(CHECK_IN_SUCCESS.replace("{ITEM}",library.getMode()));
         else out.println(CHECK_IN_UN_SUCCESS.replace("{ITEM}",library.getMode()));

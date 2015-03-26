@@ -1,19 +1,26 @@
 package com.twu.biblioteca;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListCommand implements Command {
 
     private PrintStream ps;
-    private Library library;
+    private List<ListCommandListner> listners;
 
-    public ListCommand(PrintStream ps, Library library) {
+    public ListCommand(PrintStream ps) {
         this.ps = ps;
-        this.library = library;
+        listners =new ArrayList<ListCommandListner>();
     }
 
     public void execute() {
+        for (ListCommandListner listner : listners) {
+            listner.onList(ps);
+        }
+    }
 
-        ps.println(library);
+    public void addListner(ListCommandListner ls) {
+        listners.add(ls);
     }
 }

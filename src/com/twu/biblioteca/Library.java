@@ -1,9 +1,15 @@
 package com.twu.biblioteca;
 
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-public class Library {
+public class Library implements ListCommandListner, CheckOutListner {
+    static  final String REQUEST_MESSAGE ="Enter the {ITEM} Name:";
+    static final String CHECKOUT_SUCCESS ="Thank you! Enjoy the {ITEM}";
+    static final String CHECKOUT_UN_SUCCESS ="That {ITEM} is not available";
 
     private List<Item> checkedOutItems;
     private List<Item> items;
@@ -77,5 +83,19 @@ private  void add(Item item){
 
     public String getMode() {
         return mode.name().toLowerCase();
+    }
+
+    @Override
+    public void onList(PrintStream out) {
+        out.println(toString());
+    }
+
+    @Override
+    public void onCheckOut(InputStream inputStream, PrintStream printStream) {
+        printStream.print(REQUEST_MESSAGE.replace("{ITEM}", getMode()));
+        Scanner s = new Scanner(inputStream);
+        if (checkOut(s.nextLine().trim())) printStream.println(CHECKOUT_SUCCESS.replace("{ITEM}", getMode()));
+        else printStream.println(CHECKOUT_UN_SUCCESS.replace("{ITEM}", getMode()));
+
     }
 }

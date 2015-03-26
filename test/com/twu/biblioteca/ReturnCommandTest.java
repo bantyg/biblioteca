@@ -18,7 +18,7 @@ public class ReturnCommandTest {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(os);
         new ReturnCommand(library,in,ps).execute();
-        assertEquals(Command.REQUEST_MESSAGE.replace("{ITEM}",library.getMode())+ReturnCommand.CHECK_IN_SUCCESS.replace("{ITEM}",library.getMode())+System.lineSeparator(),os.toString());
+        assertEquals(Library.REQUEST_MESSAGE.replace("{ITEM}",library.getMode())+ReturnCommand.CHECK_IN_SUCCESS.replace("{ITEM}",library.getMode())+System.lineSeparator(),os.toString());
     }
 
     @Test
@@ -27,7 +27,7 @@ public class ReturnCommandTest {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(os);
         new ReturnCommand(Library.initLibrary(LibraryMode.BOOK),in,ps).execute();
-        assertEquals(Command.REQUEST_MESSAGE.replace("{ITEM}","book")+ReturnCommand.CHECK_IN_UN_SUCCESS.replace("{ITEM}","book")+System.lineSeparator(),os.toString());
+        assertEquals(Library.REQUEST_MESSAGE.replace("{ITEM}","book")+ReturnCommand.CHECK_IN_UN_SUCCESS.replace("{ITEM}","book")+System.lineSeparator(),os.toString());
     }
 
 }

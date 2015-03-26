@@ -13,9 +13,13 @@ public class BibliotecaApp {
     public BibliotecaApp(LibraryMode libraryMode) {
         menu = new Menu();
         library = Library.initLibrary(libraryMode);
-        menu.addItem(new MenuItem("List ", new ListCommand(System.out, library)));
-        menu.addItem(new MenuItem("CheckOut", new CheckOutCommand(library,System.in,System.out)));
-        menu.addItem(new MenuItem("Return ", new ReturnCommand(library,System.in,System.out)));
+        ListCommand listCommand = new ListCommand(System.out);
+        listCommand.addListner(library);
+        CheckOutCommand checkOutCommand = new CheckOutCommand(System.in, System.out);
+        ReturnCommand returnCommand = new ReturnCommand(library, System.in, System.out);
+        menu.addItem(new MenuItem("List ", listCommand));
+        menu.addItem(new MenuItem("CheckOut", checkOutCommand));
+        menu.addItem(new MenuItem("Return ", returnCommand));
         menu.addItem(new MenuItem("Quit", new QuitCommand()));
         keepRunning = true;
     }

@@ -13,7 +13,8 @@ public class ListCommandTest {
         Library library = Library.initLibrary(LibraryMode.BOOK);
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(os);
-        ListCommand listCommand = new ListCommand(ps , library);
+        ListCommand listCommand = new ListCommand(ps);
+        listCommand.addListner(library);
         listCommand.execute();
         assertEquals(library.toString() + System.lineSeparator(), os.toString());
     }
