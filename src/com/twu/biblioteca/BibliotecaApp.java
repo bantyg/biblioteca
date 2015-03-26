@@ -16,7 +16,7 @@ public class BibliotecaApp {
         ListCommand listCommand = new ListCommand(System.out);
         listCommand.addListner(library);
         CheckOutCommand checkOutCommand = new CheckOutCommand(System.in, System.out);
-        ReturnCommand returnCommand = new ReturnCommand(library, System.in, System.out);
+        ReturnCommand returnCommand = new ReturnCommand(System.in, System.out);
         menu.addItem(new MenuItem("List ", listCommand));
         menu.addItem(new MenuItem("CheckOut", checkOutCommand));
         menu.addItem(new MenuItem("Return ", returnCommand));

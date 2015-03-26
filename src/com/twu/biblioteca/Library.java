@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Library implements ListCommandListner, CheckOutListner {
+public class Library implements ListCommandListner, CheckOutListner, CheckInListner {
     static  final String REQUEST_MESSAGE ="Enter the {ITEM} Name:";
     static final String CHECKOUT_SUCCESS ="Thank you! Enjoy the {ITEM}";
     static final String CHECKOUT_UN_SUCCESS ="That {ITEM} is not available";
+    static final String CHECK_IN_SUCCESS = "Thank you for returning the {ITEM}.";
+    static final String CHECK_IN_UN_SUCCESS = "That is not a valid {ITEM} to return.";
 
     private List<Item> checkedOutItems;
     private List<Item> items;
@@ -97,5 +99,12 @@ private  void add(Item item){
         if (checkOut(s.nextLine().trim())) printStream.println(CHECKOUT_SUCCESS.replace("{ITEM}", getMode()));
         else printStream.println(CHECKOUT_UN_SUCCESS.replace("{ITEM}", getMode()));
 
+    }
+    @Override
+    public void  onCheckIn(InputStream in, PrintStream out){
+        out.print(Library.REQUEST_MESSAGE.replace("{ITEM}",getMode()));
+        Scanner s = new Scanner(in);
+        if (checkIn(s.nextLine().trim())) out.println(CHECK_IN_SUCCESS.replace("{ITEM}",getMode()));
+        else out.println(CHECK_IN_UN_SUCCESS.replace("{ITEM}",getMode()));
     }
 }

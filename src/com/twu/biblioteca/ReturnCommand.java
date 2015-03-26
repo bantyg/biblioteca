@@ -2,28 +2,30 @@ package com.twu.biblioteca;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
 public class ReturnCommand implements Command{
-    static final String CHECK_IN_SUCCESS = "Thank you for returning the {ITEM}.";
-    static final String CHECK_IN_UN_SUCCESS = "That is not a valid {ITEM} to return.";
+    private List<CheckInListner> listners;
+    private  InputStream in;
+    private  PrintStream out;
 
-    private final Library library;
-    private final InputStream in;
-    private final PrintStream out;
-
-    public ReturnCommand(Library library, InputStream in, PrintStream out) {
-        this.library = library;
+    public ReturnCommand(InputStream in, PrintStream out) {
         this.in = in;
         this.out = out;
+        listners =new ArrayList<CheckInListner>();
     }
 
     @Override
     public void execute() throws QuitBibliotecaException {
-        out.print(Library.REQUEST_MESSAGE.replace("{ITEM}", library.getMode()));
-        Scanner s = new Scanner(in);
-        if (library.checkIn(s.nextLine().trim())) out.println(CHECK_IN_SUCCESS.replace("{ITEM}",library.getMode()));
-        else out.println(CHECK_IN_UN_SUCCESS.replace("{ITEM}",library.getMode()));
+        for (CheckInListner listner : listners) {
+            listner.onCheckIn(in,out);
+        }
+    }
+
+    public void addListner(CheckInListner checkInListner) {
+        listners.add(checkInListner);
     }
 }
